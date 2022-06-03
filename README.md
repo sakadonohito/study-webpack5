@@ -14,3 +14,10 @@ tag: step01
 - index.htmlのJS読み込みの記述を変更
 
 tag: step02
+
+## 3. distディレクトリを掃除するプラグイン導入
+- clean-webpack-pluginのインストール
+- webpack.config.jsにclean-webpack-pluginの設定を追加
+
+tag: step03
+

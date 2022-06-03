@@ -1,4 +1,5 @@
 const path = require('path')
+const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 
 module.exports = {
   mode: process.env.NODE_ENV,
@@ -9,10 +10,24 @@ module.exports = {
   },
 
   output: {
-    path: path.join(__dirname, '/dist/js'),
-    filename: '[name].main.js',
+    path: path.join(__dirname, '/dist'),
+    filename: 'js/[name].main.js',
     publicPath: ''
   },
+  plugins: [
+    new CleanWebpackPlugin({
+      //dry: true,
+      verbose: true,
+      cleanOnceBeforeBuildPatterns: [
+        '**/*',
+        '!index.html',
+        '!fonts',
+        '!images',
+        '!js',
+        '!css'
+      ]
+    })
+  ],
   devServer: {
     static: {
       directory: path.join(__dirname, 'dist')

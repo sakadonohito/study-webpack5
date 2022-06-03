@@ -8,7 +8,7 @@ import App from './App';
 //const root = createRoot(document.getElementById('root'));
 
 document.addEventListener('DOMContentLoaded', () => {
-  console.log('hoge! from index.js')
+  console.log('hoge!! from index.js')
   App()
 //  root.render(
 //    <div><p>Hoge</p></div>
