@@ -1,20 +1,23 @@
 const path = require('path')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
+const WebpackWatchedGlobEntries = require('webpack-watched-glob-entries-plugin')
+const entries = WebpackWatchedGlobEntries.getEntries([path.resolve(__dirname, './src/js/**/*.js')],{
+  ignore: path.resolve(__dirname, './src/js/**/_*.js')
+})()
+//const outputFile = '[name]'
 
-module.exports = {
+module.exports = () => ({
   mode: process.env.NODE_ENV,
   context: `${__dirname}/src`,
-  entry: {
-    index: path.join(__dirname, '/src/js', 'index.js'),
-    app: path.join(__dirname, '/src/js', 'App.js')
-  },
+  entry: entries,
 
   output: {
-    path: path.join(__dirname, '/dist'),
-    filename: 'js/[name].main.js',
+    path: path.join(__dirname, './dist'),
+    filename: `./js/[name].js`,
     publicPath: ''
   },
   plugins: [
+    new WebpackWatchedGlobEntries(),
     new CleanWebpackPlugin({
       //dry: true,
       verbose: true,
@@ -37,4 +40,4 @@ module.exports = {
     port: 8080
   },
   devtool: 'eval-source-map'
-}
+})

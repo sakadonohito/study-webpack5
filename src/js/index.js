@@ -4,12 +4,14 @@
 
 //import '../css/index.css';
 import App from './App';
+import { greet } from './modules/_greet'
 
 //const root = createRoot(document.getElementById('root'));
 
 document.addEventListener('DOMContentLoaded', () => {
-  console.log('hoge!! from index.js')
-  App()
+  console.log('hoge!! from index.js');
+  greet('Hello')
+  App();
 //  root.render(
 //    <div><p>Hoge</p></div>
 //    <StrictMode>

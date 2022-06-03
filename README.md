@@ -8,7 +8,7 @@ Webpack5での設定のやり方を試す。
 
 tag: step01
 
-## 2. JSファイルをバンドルしないを試す
+## 2. JSファイルをmain.jsにバンドルしない方法を試す
 - webpack.config.jsのentryに複数ファイルの設定を記述
 - webpack.config.jsのoutputの設定を変更
 - index.htmlのJS読み込みの記述を変更
@@ -21,3 +21,8 @@ tag: step02
 
 tag: step03
 
+## 4. entryオプションで複数ファイル指定できるようにする
+- webpack-watched-glob-entries-pluginの導入
+- webppack.config.jsに設定を追加
+
+tag: step04
