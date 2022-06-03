@@ -3,11 +3,14 @@ const path = require('path')
 module.exports = {
   mode: process.env.NODE_ENV,
   context: `${__dirname}/src`,
-  entry: path.join(__dirname, '/src/js', 'index.js'),
+  entry: {
+    index: path.join(__dirname, '/src/js', 'index.js'),
+    app: path.join(__dirname, '/src/js', 'App.js')
+  },
 
   output: {
     path: path.join(__dirname, '/dist/js'),
-    filename: 'main.js',
+    filename: '[name].main.js',
     publicPath: ''
   },
   devServer: {

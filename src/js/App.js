@@ -1,7 +1,7 @@
-import React from 'react'
+//import React from 'react'
 
-const App () => (
-    <h1>Hello</h1>
-)
+const App = () => {
+  console.log('Hello! from APP.js')
+}
 
 export default App

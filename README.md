@@ -6,3 +6,11 @@ Webpack5での設定のやり方を試す。
 - webpack.config.jsでmodeをNODE_ENVから取得
 - devServerの設定を入れる
 
+tag: step01
+
+## 2. JSファイルをバンドルしないを試す
+- webpack.config.jsのentryに複数ファイルの設定を記述
+- webpack.config.jsのoutputの設定を変更
+- index.htmlのJS読み込みの記述を変更
+
+tag: step02
