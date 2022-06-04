@@ -26,3 +26,11 @@ tag: step03
 - webppack.config.jsに設定を追加
 
 tag: step04
+
+## 5. 複数のhtmlファイル出力を試す
+- html-webpack-pluginの導入
+- webppack.config.jsに設定を追加
+
+ここでのやり方は暫定措置
+
+tag: step05
