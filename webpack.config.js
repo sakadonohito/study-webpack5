@@ -2,12 +2,22 @@ const fs = require('fs')
 const path = require('path')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const WebpackWatchedGlobEntries = require('webpack-watched-glob-entries-plugin')
-const entries = WebpackWatchedGlobEntries.getEntries([path.resolve(__dirname, './src/js/**/*.js')],{
+//const entries = WebpackWatchedGlobEntries.getEntries([path.resolve(__dirname, './src/js/**/*.js')],{
+//  ignore: [
+//    path.resolve(__dirname, './src/js/**/_*.js'),
+//    path.resolve(__dirname, './src/js/AppApp.js')
+//  ]
+//})()
+const entries = WebpackWatchedGlobEntries.getEntries([
+  path.resolve(__dirname, './src/ts/**/*.ts'),
+  path.resolve(__dirname, './src/ts/**/*.tsx')
+],{
   ignore: [
-    path.resolve(__dirname, './src/js/**/_*.js'),
-    path.resolve(__dirname, './src/js/AppApp.js')
+    path.resolve(__dirname, './src/ts/**/_*.ts'),
+    path.resolve(__dirname, './src/ts/**/_*.tsx')
   ]
 })()
+
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const htmlGlobPlugins = (entries, srcPath) => {
   return Object.keys(entries).filter( (key) => {
@@ -34,14 +44,18 @@ module.exports = () => ({
     filename: `./js/[name].js`,
     publicPath: ''
   },
-//  module: {
-//    rules: [
+  module: {
+    rules: [
 //      {
 //        test: /\.html$/i,
 //        loader: 'html-loader'
 //      }
-//    ]
-//  },
+      {
+        test: /\.tsx?$/,
+        use: "ts-loader"
+      }
+    ]
+  },
   plugins: [
     new WebpackWatchedGlobEntries(),
     new CleanWebpackPlugin({
@@ -72,6 +86,9 @@ module.exports = () => ({
 */
     ...htmlGlobPlugins(entries, './templates')
   ],
+  resolve: {
+    extensions: [".ts",".tsx",".js",".json"]
+  },
   devServer: {
     static: {
       directory: path.join(__dirname, 'dist')
@@ -84,5 +101,6 @@ module.exports = () => ({
   stats: {
     children: true,
     errorDetails: true
-  }
+  },
+  target: 'web'
 })

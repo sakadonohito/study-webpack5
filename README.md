@@ -46,3 +46,15 @@ tag: step05
   - require('fs')追加※出力JSとhtmlに差がある場合を考慮しfilterをかける
 
 tag: step06
+
+## 7. JavaScript -> TypeScript に変更(React対応)
+- TypeScript関連とReact関連のパッケージ追加
+- ts-loaderの追加
+- tsconfig.jsonを追加
+  - とりあえずの対応なのでstrictはfalseにする(ごめんね)
+- webpack.config.jsの設定をTypeScript用に変更
+  - GlobEntriesの記述を.tsと.tsxの2種類書く(ignoreも)
+
+Reactぽいことは何もしてない。ただ対応しただけ。
+
+tag: step07
