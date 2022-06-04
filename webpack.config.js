@@ -46,10 +46,17 @@ module.exports = () => ({
   },
   module: {
     rules: [
-//      {
-//        test: /\.html$/i,
-//        loader: 'html-loader'
-//      }
+      {
+        test: /\.(png|jpe?g|gif|svg)$/i,
+        generator: {
+          filename: `./images/[name].[contenthash][ext]`
+        },
+        type: 'asset/resource'
+      },
+      {
+        test: /\.html$/i,
+        loader: 'html-loader'
+      },
       {
         test: /\.tsx?$/,
         use: "ts-loader"

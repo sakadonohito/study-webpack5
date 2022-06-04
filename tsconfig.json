@@ -10,7 +10,15 @@
       "ES2021",
       "DOM"
     ],
+    "typeRoots": [
+      "node_modules/@types",
+      "types"
+    ],
     "allowJs": true,
     "allowSyntheticDefaultImports": true
-  }
+  },
+  "include": [
+    "src/**/*",
+    "types/**/*"
+  ]
 }

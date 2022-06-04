@@ -58,3 +58,9 @@ tag: step06
 Reactぽいことは何もしてない。ただ対応しただけ。
 
 tag: step07
+
+## 8. 画像を読み込めるようにする
+- webpack.config.jsに設定を追加
+- TypeScriptで画像を扱えるように[任意].d.tsファイル追加
+
+tag: step08
