@@ -9,6 +9,8 @@
     "lib": [
       "ES2021",
       "DOM"
-    ]
+    ],
+    "allowJs": true,
+    "allowSyntheticDefaultImports": true
   }
 }

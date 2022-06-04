@@ -9,12 +9,12 @@ const WebpackWatchedGlobEntries = require('webpack-watched-glob-entries-plugin')
 //  ]
 //})()
 const entries = WebpackWatchedGlobEntries.getEntries([
-  path.resolve(__dirname, './src/ts/**/*.ts'),
-  path.resolve(__dirname, './src/ts/**/*.tsx')
+  path.resolve(__dirname, './src/ts/*.ts'),
+  path.resolve(__dirname, './src/ts/*.tsx')
 ],{
   ignore: [
-    path.resolve(__dirname, './src/ts/**/_*.ts'),
-    path.resolve(__dirname, './src/ts/**/_*.tsx')
+    path.resolve(__dirname, './src/ts/modules/*.*'),
+    path.resolve(__dirname, './src/ts/components/*.*')
   ]
 })()
 
