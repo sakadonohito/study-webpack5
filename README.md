@@ -21,9 +21,11 @@ tag: step02
 
 tag: step03
 
-## 4. entryオプションで複数ファイル指定できるようにする
+## 4. 複数ファイルを出力できるようにする
 - webpack-watched-glob-entries-pluginの導入
 - webppack.config.jsに設定を追加
+
+個別出力しないJSファイルはignore設定に書くので出力ファイル数が少ない場合はwebpack-watched-glob-entries-pluginを使わずにentryオプションに直接書いたほうがよいかも。
 
 tag: step04
 
@@ -32,5 +34,15 @@ tag: step04
 - webppack.config.jsに設定を追加
 
 ここでのやり方は暫定措置
+用意するhtmlファイルと出力するhtmlファイルで名前が違う場合は有用。
+ただしファイルごとに設定を書かなければならない。
 
 tag: step05
+
+
+## 6, 複数のhtmlファイルを動的に出力する
+- html-webpack-pluginの導入(step5で導入したもの)
+- webppack.config.jsに設定を追加
+  - require('fs')追加※出力JSとhtmlに差がある場合を考慮しfilterをかける
+
+tag: step06

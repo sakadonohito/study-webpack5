@@ -1,3 +1,4 @@
+const fs = require('fs')
 const path = require('path')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const WebpackWatchedGlobEntries = require('webpack-watched-glob-entries-plugin')
@@ -8,6 +9,18 @@ const entries = WebpackWatchedGlobEntries.getEntries([path.resolve(__dirname, '.
   ]
 })()
 const HtmlWebpackPlugin = require('html-webpack-plugin')
+const htmlGlobPlugins = (entries, srcPath) => {
+  return Object.keys(entries).filter( (key) => {
+    return fs.existsSync(path.resolve(__dirname, `src/${srcPath}/${key}.html`))
+  }).map( (key) => 
+    new HtmlWebpackPlugin({
+      inject: 'body',
+      filename: `${key}.html`,
+      template: `${srcPath}/${key}.html`,
+      chunks: [key]
+    })
+  );
+};
 
 //const outputFile = '[name]'
 
@@ -21,6 +34,14 @@ module.exports = () => ({
     filename: `./js/[name].js`,
     publicPath: ''
   },
+//  module: {
+//    rules: [
+//      {
+//        test: /\.html$/i,
+//        loader: 'html-loader'
+//      }
+//    ]
+//  },
   plugins: [
     new WebpackWatchedGlobEntries(),
     new CleanWebpackPlugin({
@@ -28,15 +49,14 @@ module.exports = () => ({
       verbose: true,
       cleanOnceBeforeBuildPatterns: [
         '**/*',
-        '!index.html',
-        '!index_sample.html',
-        '!another.html',
+        '!.gitkeep',
         '!fonts',
         '!images',
         '!js',
         '!css'
       ]
     }),
+/*
     new HtmlWebpackPlugin({
       inject: 'body',
       filename: 'index_sample.html',
@@ -45,10 +65,12 @@ module.exports = () => ({
     }),
     new HtmlWebpackPlugin({
       inject: 'body',
-      filename: 'another.html',
+      filename: 'another_sample.html',
       template: './html/another.html', //context is src
       chunks: ['another']
-    })
+    }),
+*/
+    ...htmlGlobPlugins(entries, './templates')
   ],
   devServer: {
     static: {
@@ -60,6 +82,7 @@ module.exports = () => ({
   },
   devtool: 'eval-source-map',
   stats: {
-    children: true
+    children: true,
+    errorDetails: true
   }
 })
