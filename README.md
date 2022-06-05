@@ -64,3 +64,9 @@ tag: step07
 - TypeScriptで画像を扱えるように[任意].d.tsファイル追加
 
 tag: step08
+
+## 9. CSSを扱えるようにする
+- css-loader他CSS関連を追加
+- package.jsonにautoprefixerの設定を追加する
+- webpack.config.jsに設定を追加
+  - cssの`background-image`のpathが正しく出力されるように`MiniCssExtractPlugin`にpublicPathの設定も追加

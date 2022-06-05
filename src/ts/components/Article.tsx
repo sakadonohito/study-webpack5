@@ -1,7 +1,7 @@
 import React from 'react'
 
 import arupaka from '../../images/animal_arupaka.png'
-
+import officeWall from '../../images/office_wall.jpg'
 const Article = () => (
   <>
     <article>

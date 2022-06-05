@@ -32,6 +32,8 @@ const htmlGlobPlugins = (entries, srcPath) => {
   );
 };
 
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+
 //const outputFile = '[name]'
 
 module.exports = () => ({
@@ -47,16 +49,42 @@ module.exports = () => ({
   module: {
     rules: [
       {
-        test: /\.(png|jpe?g|gif|svg)$/i,
-        generator: {
-          filename: `./images/[name].[contenthash][ext]`
-        },
-        type: 'asset/resource'
+        test: /\.(sa|sc|c)ss$/i,
+        use: [
+          {
+            loader: MiniCssExtractPlugin.loader,
+            options: {
+              publicPath: '../'
+            }
+          },
+          'css-loader',
+          {
+            loader: 'postcss-loader',
+            options: {
+              postcssOptions: {
+                plugins: [require('autoprefixer')({grid: true})]
+              }
+            }
+          },
+          {
+            loader: 'sass-loader',
+            options: {
+              implementation: require('sass')
+            }
+          }
+        ]
       },
       {
         test: /\.html$/i,
         loader: 'html-loader'
       },
+      {
+        test: /\.(png|jpe?g|gif|svg)$/i,
+        generator: {
+          filename: `images/[name].[contenthash][ext]`
+        },
+        type: 'asset/resource'
+      },      
       {
         test: /\.tsx?$/,
         use: "ts-loader"
@@ -77,6 +105,9 @@ module.exports = () => ({
         '!css'
       ]
     }),
+    new MiniCssExtractPlugin({
+      filename: './css/[name].css'
+    }),
 /*
     new HtmlWebpackPlugin({
       inject: 'body',
@@ -94,7 +125,10 @@ module.exports = () => ({
     ...htmlGlobPlugins(entries, './templates')
   ],
   resolve: {
-    extensions: [".ts",".tsx",".js",".json"]
+    extensions: [".ts",".tsx",".js",".json"],
+    alias: {
+      '@image': path.resolve(__dirname, './src/images/')
+    }
   },
   devServer: {
     static: {

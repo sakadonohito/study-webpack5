@@ -1,0 +1,5 @@
+.hero {
+    background-image: url('@image/office_wall.jpg');
+    height: 35vh;
+    width: 100vw
+}
