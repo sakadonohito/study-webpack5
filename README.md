@@ -70,3 +70,5 @@ tag: step08
 - package.jsonにautoprefixerの設定を追加する
 - webpack.config.jsに設定を追加
   - cssの`background-image`のpathが正しく出力されるように`MiniCssExtractPlugin`にpublicPathの設定も追加
+  
+  tag: step09
