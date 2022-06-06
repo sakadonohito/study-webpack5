@@ -85,3 +85,8 @@ tag: step09
 
 tag: step10
 	
+## 11. fontファイルを扱う
+- CSSに@font-faceの記述追加して任意のfontファイルを用意する
+- `webpack.config.js`にfontリソースを扱う設定を追加
+
+tag: step11

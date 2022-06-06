@@ -9,7 +9,7 @@ const entries = WebpackWatchedGlobEntries.getEntries([
   //path.resolve(__dirname, './src/ts/*.tsx')
   path.resolve(__dirname, './src/ts/index.tsx'),
   path.resolve(__dirname, './src/ts/another.ts'),
-  path.resolve(__dirname, './src/css/style.css'),
+  path.resolve(__dirname, './src/css/style.css')
 ],{
   ignore: [
     path.resolve(__dirname, './src/ts/modules/*.*'),
@@ -87,7 +87,7 @@ module.exports = () => ({
       {
         test: /\.(ttf|otf|eot|woff|woff2)$/i,
         generator: {
-          filename: `./fonts/[name][ext]`
+          filename: `fonts/[name][ext]`
         },
         type: 'asset/resource'
       },

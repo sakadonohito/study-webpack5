@@ -1,11 +1,11 @@
 @font-face {
     font-family: 'cinecaption226';
-    src: local('@font/cinecaption226.ttf');
+    src: url('@font/cinecaption226.ttf');
 }
 
 @font-face {
     font-family: 'ReggaeOne-Regular';
-    src: local('@font/ReggaeOne-Regular.ttf');
+    src: url('@font/ReggaeOne-Regular.ttf');
 }
 
 * {
