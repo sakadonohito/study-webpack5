@@ -82,7 +82,12 @@ module.exports = () => ({
         generator: {
           filename: `images/[name].[contenthash][ext]`
         },
-        type: 'asset/resource'
+        type: 'asset',
+        parser: {
+          dataUrlCondition: {
+            maxSize: 20 * 1024 //20KB
+          }
+        }
       },      
       {
         test: /\.(ttf|otf|eot|woff|woff2)$/i,

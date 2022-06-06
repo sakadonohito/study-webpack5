@@ -90,3 +90,10 @@ tag: step10
 - `webpack.config.js`にfontリソースを扱う設定を追加
 
 tag: step11
+
+## 12. 画像のサイズで処理を分ける
+小さいサイズの画像はdataURLにする。
+
+- `webpack.config.js`の設定変更
+
+tag: step12
