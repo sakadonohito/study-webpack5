@@ -97,3 +97,11 @@ tag: step11
 - `webpack.config.js`の設定変更
 
 tag: step12
+
+## 13. CSVファイルの取り込み
+おそらくバンドル時にJSONに変換されてJSファイル内に取り込まれる
+
+- `csv-loader`の導入
+- `webpack.config.js`にcsv-loaderの記述追加
+
+tag: step13

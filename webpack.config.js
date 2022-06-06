@@ -48,6 +48,12 @@ module.exports = () => ({
   module: {
     rules: [
       {
+        test: /\.(csv|tsv)$/,
+        use: [
+          'csv-loader'
+        ]
+      },
+      {
         test: /\.(sa|sc|c)ss$/i,
         use: [
           {
