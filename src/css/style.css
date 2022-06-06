@@ -1,3 +1,13 @@
+@font-face {
+    font-family: 'cinecaption226';
+    src: local('@font/cinecaption226.ttf');
+}
+
+@font-face {
+    font-family: 'ReggaeOne-Regular';
+    src: local('@font/ReggaeOne-Regular.ttf');
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -5,4 +15,14 @@
 
 body {
 
+}
+
+h1 {
+    font-family: 'ReggaeOne-Regular';
+    font-size: 8rem;
+}
+
+h2 {
+    font-family: 'cinecaption226';
+    font-size: 4rem;
 }

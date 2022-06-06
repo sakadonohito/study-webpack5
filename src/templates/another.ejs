@@ -4,7 +4,6 @@
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>study webpack5</title>
-
   </head>
   <body>
     <!-- ページ全体 -->
@@ -14,7 +13,8 @@
         <p>This page is Another.</p>
       </header>
       <main>
-        <img src="../images/airplane_midnight.jpg" alt="画像はイメージです" />
+        <!-- <img src="../images/airplane_midnight.jpg" alt="画像はイメージです" /> -->
+        <img src="<%= require('../images/airplane_midnight.jpg') %>" alt="画像はイメージです" />
       </main>
     </div>
   </body>

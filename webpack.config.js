@@ -1,16 +1,15 @@
 const fs = require('fs')
 const path = require('path')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
+const RemoveEmptyScriptsPlugin = require('webpack-remove-empty-scripts')
 const WebpackWatchedGlobEntries = require('webpack-watched-glob-entries-plugin')
-//const entries = WebpackWatchedGlobEntries.getEntries([path.resolve(__dirname, './src/js/**/*.js')],{
-//  ignore: [
-//    path.resolve(__dirname, './src/js/**/_*.js'),
-//    path.resolve(__dirname, './src/js/AppApp.js')
-//  ]
-//})()
 const entries = WebpackWatchedGlobEntries.getEntries([
-  path.resolve(__dirname, './src/ts/*.ts'),
-  path.resolve(__dirname, './src/ts/*.tsx')
+  //path.resolve(__dirname, './src/ts/**/*.ts'),
+  //path.resolve(__dirname, './src/ts/*.ts'),
+  //path.resolve(__dirname, './src/ts/*.tsx')
+  path.resolve(__dirname, './src/ts/index.tsx'),
+  path.resolve(__dirname, './src/ts/another.ts'),
+  path.resolve(__dirname, './src/css/style.css'),
 ],{
   ignore: [
     path.resolve(__dirname, './src/ts/modules/*.*'),
@@ -21,17 +20,16 @@ const entries = WebpackWatchedGlobEntries.getEntries([
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const htmlGlobPlugins = (entries, srcPath) => {
   return Object.keys(entries).filter( (key) => {
-    return fs.existsSync(path.resolve(__dirname, `src/${srcPath}/${key}.html`))
+    return fs.existsSync(path.resolve(__dirname, `src/${srcPath}/${key}.ejs`))
   }).map( (key) => 
     new HtmlWebpackPlugin({
       inject: 'body',
       filename: `${key}.html`,
-      template: `${srcPath}/${key}.html`,
-      chunks: [key]
+      template: `${srcPath}/${key}.ejs`,
+      chunks: [key,'style']
     })
   );
 };
-
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 
 //const outputFile = '[name]'
@@ -39,6 +37,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 module.exports = () => ({
   mode: process.env.NODE_ENV,
   context: `${__dirname}/src`,
+
   entry: entries,
 
   output: {
@@ -86,6 +85,13 @@ module.exports = () => ({
         type: 'asset/resource'
       },      
       {
+        test: /\.(ttf|otf|eot|woff|woff2)$/i,
+        generator: {
+          filename: `./fonts/[name][ext]`
+        },
+        type: 'asset/resource'
+      },
+      {
         test: /\.tsx?$/,
         use: "ts-loader"
       }
@@ -105,9 +111,11 @@ module.exports = () => ({
         '!css'
       ]
     }),
+    new RemoveEmptyScriptsPlugin(),
     new MiniCssExtractPlugin({
       filename: './css/[name].css'
     }),
+
 /*
     new HtmlWebpackPlugin({
       inject: 'body',
@@ -127,7 +135,8 @@ module.exports = () => ({
   resolve: {
     extensions: [".ts",".tsx",".js",".json"],
     alias: {
-      '@image': path.resolve(__dirname, './src/images/')
+      '@image': path.resolve(__dirname, './src/images'),
+      '@font': path.resolve(__dirname, './src/fonts')
     }
   },
   devServer: {

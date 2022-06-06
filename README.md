@@ -71,4 +71,17 @@ tag: step08
 - webpack.config.jsに設定を追加
   - cssの`background-image`のpathが正しく出力されるように`MiniCssExtractPlugin`にpublicPathの設定も追加
   
-  tag: step09
+tag: step09
+
+## 10. 少し改良する
+- templateのファイルを`.html` -> `.ejs`に変更する
+  - templateで直接参照している画像(`<img src="ここ"/>`)の記述を`require('...')`に変更する
+- `webpack.config.js`の変更
+  - 複数のhtmlファイルで共有するCSS(style.css)をentryに含めて出力されるようにする
+  - `webpack-remove-empty-scripts`を導入し不要なファイル(style.js)が生成されないようにする
+  - html出力の設定を変更
+	- templateを`*.ejs`に
+	- chunksに`'style'`を追加
+
+tag: step10
+	
