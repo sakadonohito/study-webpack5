@@ -105,3 +105,13 @@ tag: step12
 - `webpack.config.js`にcsv-loaderの記述追加
 
 tag: step13
+
+## 14. ESLint導入
+- ESLint関連のパッケージ導入と関連ファイルの作成(.eslintignore,.eslintrc.js)
+  - `npx eslint init`で初期設定をする
+  - Webpack5では`eslint-loader`は非推奨、`eslint-webpack-plugin`を入れる
+- `webpack.config.js`にESLintの設定追加
+- package.jsonのscriptsにESLint実行コマンド追加(lint)
+
+tag: step14
+

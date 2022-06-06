@@ -1,11 +1,15 @@
 import React from 'react'
 
+import json from '../../data/menu.json'
+
+const rows = json.map( (row,key) => (
+  <li key={key}>{row.title} / {row.category}</li>
+))
+
 const SideList = () => (
   <>
     <ul>
-      <li>1234567890</li>
-      <li>abcdefg</li>
-      <li>じゅげむじゅげむ五劫の擦り切れ</li>
+    {rows}
     </ul>
  </>
 )

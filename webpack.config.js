@@ -32,6 +32,11 @@ const htmlGlobPlugins = (entries, srcPath) => {
 };
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 
+const ESLintPlugin = require('eslint-webpack-plugin')
+const lintOptions = {
+  // FYI: https://webpack.js.org/plugins/eslint-webpack-plugin/
+}
+
 //const outputFile = '[name]'
 
 module.exports = () => ({
@@ -141,7 +146,8 @@ module.exports = () => ({
       chunks: ['another']
     }),
 */
-    ...htmlGlobPlugins(entries, './templates')
+    ...htmlGlobPlugins(entries, './templates'),
+    new ESLintPlugin(lintOptions)
   ],
   resolve: {
     extensions: [".ts",".tsx",".js",".json"],

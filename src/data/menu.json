@@ -1,0 +1,26 @@
+[
+  {
+    "title":"あいうえお",
+    "category":"食事"
+  },
+  {
+    "title":"かきくけこ",
+    "category":"交通"
+  },
+  {
+    "title":"さしすせそ",
+    "category":"観光"
+  },
+  {
+    "title":"たちつてと",
+    "category":"趣味"
+  },
+  {
+    "title":"なにぬねの",
+    "category":"金融"
+  },
+  {
+    "title":"はひふへほ",
+    "category":"仕事"
+  }
+]

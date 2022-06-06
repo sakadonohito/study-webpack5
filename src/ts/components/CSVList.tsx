@@ -2,9 +2,6 @@ import React from 'react'
 
 import csv from '../../data/member.csv'
 
-console.log(csv)
-
-
 const rows = csv.map( (row,key) => (
     <tr key={key}>
     <td>{row[0]}</td>

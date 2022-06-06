@@ -1,7 +1,7 @@
 import React from 'react'
 
 import quokka from '@image/animal_quokka.png'
-import officeWall from '@image/office_wall.jpg'
+//import officeWall from '@image/office_wall.jpg'
 import h2HeaderImg from '@image/h2_img.svg'
 import Table from './CSVList'
 

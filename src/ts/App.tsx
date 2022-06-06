@@ -11,8 +11,11 @@ const App = () => {
 
   return (
     <>
-      <Header title={'Hoge'} />
-      <div><SideList /></div>
+      <Header title={'Hello, Webpack5!'} />
+      <div>
+        <p>タイトル / カテゴリー</p>
+        <SideList />
+      </div>
       <Article />
       <Footer />
     </>
