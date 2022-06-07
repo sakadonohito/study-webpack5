@@ -140,8 +140,10 @@ tag: step16
 もっとスマートな設定があればいいと思うがどうなんでしょう。
 
 ## 渋々インストールしたパッケージ
-- clean-webpack-plugin
-  - 掃除する処理が標準に組み込まれればいいのに......
+- ~~clean-webpack-plugin~~
+  - ~~掃除する処理が標準に組み込まれればいいのに......~~
+  - Webpack5の標準機能でdist配下の全てを削除しビルド時に必要なディレクトリも作成されるのを確認したため削除しました。やったね！
+	- `webpacl.config.js`,`webpack.common.js`のoutputの項目に *clean: true* を追加
 - terser-webpack-plugin
   - vendorとして切り分けられたJSのライセンス情報をファイル内にバンドルさせるために使った。ライセンステキスト気にしないならいらない。
 - webpack-watched-glob-entries-plugin

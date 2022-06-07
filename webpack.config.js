@@ -1,6 +1,5 @@
 const fs = require('fs')
 const path = require('path')
-const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const RemoveEmptyScriptsPlugin = require('webpack-remove-empty-scripts')
 //const TerserPlugin = require('terser-webpack-plugin')
 //const ImageminPlugin = require('imagemin-webpack-plugin').default;
@@ -51,7 +50,8 @@ module.exports = () => ({
   output: {
     path: path.join(__dirname, './dist'),
     filename: `./js/[name].js`,
-    publicPath: ''
+    publicPath: '',
+    clean: true
   },
   module: {
     rules: [
@@ -142,18 +142,6 @@ module.exports = () => ({
   
   plugins: [
     new WebpackWatchedGlobEntries(),
-    new CleanWebpackPlugin({
-      //dry: true,
-      verbose: true,
-      cleanOnceBeforeBuildPatterns: [
-        '**/*',
-        '!.gitkeep',
-        '!fonts',
-        '!images',
-        '!js',
-        '!css'
-      ]
-    }),
     new RemoveEmptyScriptsPlugin(),
 /*
     new HtmlWebpackPlugin({
