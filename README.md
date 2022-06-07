@@ -134,3 +134,21 @@ Webpackからの挿入はしないが一般的なmetaタグやOGPタグのサン
   - ファビコンとファルコンてちょっと似てるよね
 
 tag: step16
+
+
+# 総括
+もっとスマートな設定があればいいと思うがどうなんでしょう。
+
+## 渋々インストールしたパッケージ
+- clean-webpack-plugin
+  - 掃除する処理が標準に組み込まれればいいのに......
+- terser-webpack-plugin
+  - vendorとして切り分けられたJSのライセンス情報をファイル内にバンドルさせるために使った。ライセンステキスト気にしないならいらない。
+- webpack-watched-glob-entries-plugin
+  - entryを直接指定するならいらない
+- webpack-remove-empty-scripts
+  - CSSをエントリーに加えた際に作られる不要なJSを消すためにやむなく導入。標準機能で拡張子で処理分けできるようになればいいのに。
+- imagemin-mozjpeg
+- imagemin-webpack-plugin
+  - 画像圧縮のため導入。現状ダウングレードしないと使えないというメンテナンスに不安があるパッケージ。
+  
