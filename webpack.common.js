@@ -2,9 +2,7 @@ const fs = require('fs')
 const path = require('path')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const RemoveEmptyScriptsPlugin = require('webpack-remove-empty-scripts')
-//const TerserPlugin = require('terser-webpack-plugin')
-//const ImageminPlugin = require('imagemin-webpack-plugin').default;
-//const ImageminMozjpeg = require('imagemin-mozjpeg')
+const TerserPlugin = require('terser-webpack-plugin')
 const WebpackWatchedGlobEntries = require('webpack-watched-glob-entries-plugin')
 const entries = WebpackWatchedGlobEntries.getEntries([
   //path.resolve(__dirname, './src/ts/**/*.ts'),
@@ -22,11 +20,13 @@ const entries = WebpackWatchedGlobEntries.getEntries([
 
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const htmlGlobPlugins = (entries, srcPath) => {
+
   return Object.keys(entries).filter( (key) => {
     return fs.existsSync(path.resolve(__dirname, `src/${srcPath}/${key}.ejs`))
   }).map( (key) => 
     new HtmlWebpackPlugin({
       inject: 'body',
+      minify: false,
       filename: `${key}.html`,
       template: `${srcPath}/${key}.ejs`,
       chunks: [key,'style']
@@ -34,16 +34,12 @@ const htmlGlobPlugins = (entries, srcPath) => {
   );
 };
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
-
 const ESLintPlugin = require('eslint-webpack-plugin')
 const lintOptions = {
   // FYI: https://webpack.js.org/plugins/eslint-webpack-plugin/
 }
 
-//const outputFile = '[name]'
-
-module.exports = () => ({
-  mode: process.env.NODE_ENV,
+module.exports = (outputFile) => ({
   context: `${__dirname}/src`,
 
   entry: entries,
@@ -53,6 +49,7 @@ module.exports = () => ({
     filename: `./js/[name].js`,
     publicPath: ''
   },
+
   module: {
     rules: [
       {
@@ -88,10 +85,6 @@ module.exports = () => ({
         ]
       },
       {
-        test: /\.html$/i,
-        loader: 'html-loader'
-      },
-      {
         test: /\.(png|jpe?g|gif|svg)$/i,
         generator: {
           filename: `images/[name].[contenthash][ext]`
@@ -111,37 +104,44 @@ module.exports = () => ({
         type: 'asset/resource'
       },
       {
+        test: /\.html$/i,
+        loader: 'html-loader'
+      },
+      {
         test: /\.tsx?$/,
         use: "ts-loader"
       }
     ]
   },
 
-  //optimization: {
-  //  minimizer: [
-  //    new TerserPlugin({
-  //      extractComments: false
-  //    })
-  //  ],
-  //  splitChunks: {
-  //    chunks: 'initial',
-  //    cacheGroups: {
-  //      vendor: {
-  //        test: /node_modules/i,
-  //        name: 'vendor'
-  //      },
-  //      vendorsModules: {
-  //        test: /src[\\/](js|ts)[\\/]modules/i,
-  //        name: 'vendor-modules',
-  //        minSize: 0,
-  //        minChunks: 2
-  //      }
-  //    }
-  //  }
-  //},
+  optimization: {
+    minimizer: [
+      new TerserPlugin({
+        extractComments: false
+      })
+    ],
+    splitChunks: {
+      chunks: 'initial',
+      cacheGroups: {
+        vendor: {
+          test: /node_modules/i,
+          name: 'vendor'
+        },
+        vendorsModules: {
+          test: /src[\\/](js|ts)[\\/]modules/i,
+          name: 'vendor-modules',
+          minSize: 0,
+          minChunks: 2
+        }
+      }
+    }
+  },
   
+  performance: {
+    hints: false
+  },
+
   plugins: [
-    new WebpackWatchedGlobEntries(),
     new CleanWebpackPlugin({
       //dry: true,
       verbose: true,
@@ -154,6 +154,7 @@ module.exports = () => ({
         '!css'
       ]
     }),
+    new WebpackWatchedGlobEntries(),
     new RemoveEmptyScriptsPlugin(),
 /*
     new HtmlWebpackPlugin({
@@ -173,22 +174,9 @@ module.exports = () => ({
     new MiniCssExtractPlugin({
       filename: './css/[name].css'
     }),
-    //new ImageminPlugin({
-    //  pngquant: {
-    //    quality: '60-70'
-    //  },
-    //  gifsiicle: {
-    //    optimizationLevel: 3
-    //  },
-    //  svgo: {},
-    //  plugins: [
-    //    ImageminMozjpeg({
-    //      quality: 65
-    //    })
-    //  ]
-    //}),
     new ESLintPlugin(lintOptions)
   ],
+
   resolve: {
     extensions: [".ts",".tsx",".js",".json"],
     alias: {
@@ -196,18 +184,6 @@ module.exports = () => ({
       '@font': path.resolve(__dirname, './src/fonts')
     }
   },
-  devServer: {
-    static: {
-      directory: path.join(__dirname, 'dist')
-    },
-    host: "0.0.0.0",
-    open: true,
-    port: 8080
-  },
-  devtool: 'eval-source-map',
-  stats: {
-    children: true,
-    errorDetails: true
-  },
+
   target: 'web'
 })

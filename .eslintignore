@@ -2,3 +2,6 @@
 dist/*
 node_modues
 webpack.config.js
+webpack.dev.js
+webpack.prod.js
+webpack.common.js

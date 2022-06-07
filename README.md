@@ -16,13 +16,13 @@ tag: step01
 tag: step02
 
 ## 3. distディレクトリを掃除するプラグイン導入
-- clean-webpack-pluginのインストール
+- `clean-webpack-plugin`を追加
 - webpack.config.jsにclean-webpack-pluginの設定を追加
 
 tag: step03
 
 ## 4. 複数ファイルを出力できるようにする
-- webpack-watched-glob-entries-pluginの導入
+- `webpack-watched-glob-entries-plugin`を追加
 - webppack.config.jsに設定を追加
 
 個別出力しないJSファイルはignore設定に書くので出力ファイル数が少ない場合はwebpack-watched-glob-entries-pluginを使わずにentryオプションに直接書いたほうがよいかも。
@@ -30,7 +30,7 @@ tag: step03
 tag: step04
 
 ## 5. 複数のhtmlファイル出力を試す
-- html-webpack-pluginの導入
+- `html-webpack-plugin`を追加
 - webppack.config.jsに設定を追加
 
 ここでのやり方は暫定措置
@@ -41,7 +41,7 @@ tag: step05
 
 
 ## 6, 複数のhtmlファイルを動的に出力する
-- html-webpack-pluginの導入(step5で導入したもの)
+- `html-webpack-plugin`を追加(step5で追加したもの)
 - webppack.config.jsに設定を追加
   - require('fs')追加※出力JSとhtmlに差がある場合を考慮しfilterをかける
 
@@ -49,7 +49,7 @@ tag: step06
 
 ## 7. JavaScript -> TypeScript に変更(React対応)
 - TypeScript関連とReact関連のパッケージ追加
-- ts-loaderの追加
+- `ts-loader`の追加
 - tsconfig.jsonを追加
   - とりあえずの対応なのでstrictはfalseにする(ごめんね)
 - webpack.config.jsの設定をTypeScript用に変更
@@ -66,7 +66,7 @@ tag: step07
 tag: step08
 
 ## 9. CSSを扱えるようにする
-- css-loader他CSS関連を追加
+- `css-loader`他CSS関連を追加
 - package.jsonにautoprefixerの設定を追加する
 - webpack.config.jsに設定を追加
   - cssの`background-image`のpathが正しく出力されるように`MiniCssExtractPlugin`にpublicPathの設定も追加
@@ -78,7 +78,7 @@ tag: step09
   - templateで直接参照している画像(`<img src="ここ"/>`)の記述を`require('...')`に変更する
 - `webpack.config.js`の変更
   - 複数のhtmlファイルで共有するCSS(style.css)をentryに含めて出力されるようにする
-  - `webpack-remove-empty-scripts`を導入し不要なファイル(style.js)が生成されないようにする
+  - `webpack-remove-empty-scripts`を追加し不要なファイル(style.js)が生成されないようにする
   - html出力の設定を変更
 	- templateを`*.ejs`に
 	- chunksに`'style'`を追加
@@ -101,17 +101,29 @@ tag: step12
 ## 13. CSVファイルの取り込み
 おそらくバンドル時にJSONに変換されてJSファイル内に取り込まれる
 
-- `csv-loader`の導入
+- `csv-loader`を追加
 - `webpack.config.js`にcsv-loaderの記述追加
 
 tag: step13
 
 ## 14. ESLint導入
-- ESLint関連のパッケージ導入と関連ファイルの作成(.eslintignore,.eslintrc.js)
+- ESLint関連のパッケージ追加と関連ファイルの作成(.eslintignore,.eslintrc.js)
   - `npx eslint init`で初期設定をする
   - Webpack5では`eslint-loader`は非推奨、`eslint-webpack-plugin`を入れる
 - `webpack.config.js`にESLintの設定追加
 - package.jsonのscriptsにESLint実行コマンド追加(lint)
 
 tag: step14
+
+## 15. 開発(development)と公開(production)でwebpack処理を分ける(仮)
+- `imagemin-webpack-plugin`,`imagemin-mozjpeg`を追加
+  - `imagemin-mozjpeg`は2022.06.07時点では最新の@10.0.0だとエラーになるので@9.0.0にする
+- `terser-webpack-plugin`を追加
+- `webpack.dev.js`,`webpack.prod.js`,`webpack.common.js`を作成する
+  - `browser-sync`を使わず`webpack-dev-server`をそのまま使う
+  - `webpack.prod.js`には最適化処理などを追加する
+  - `package.json`のscriptsを編集する
+  - 比較用としてこれまで使ってきた`webpack.consig.js`は削除せず残しておく
+
+tag: step15
 
