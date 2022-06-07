@@ -29,7 +29,8 @@ const htmlGlobPlugins = (entries, srcPath) => {
       minify: false,
       filename: `${key}.html`,
       template: `${srcPath}/${key}.ejs`,
-      chunks: [key,'style']
+      chunks: [key,'style'],
+      favicon: `${path.resolve(__dirname, 'src/favicon/favicon.ico')}`
     })
   );
 };

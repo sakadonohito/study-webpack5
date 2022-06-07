@@ -127,3 +127,10 @@ tag: step14
 
 tag: step15
 
+## 16. htmlテンプレートにmetaやOGPタグサンプルの追加とfaviconの導入
+Webpackからの挿入はしないが一般的なmetaタグやOGPタグのサンプルをコメントアウトした状態で追加。htmlファイルごとに(ページごとに)差異がある情報をWebpackで扱うのは違うと考えテンプレート側にコメントアウトの形で追加した。
+
+- `webpack.config.js`,`webpack.common.js`にfaviconを挿入する処理を追加
+  - ファビコンとファルコンてちょっと似てるよね
+
+tag: step16
